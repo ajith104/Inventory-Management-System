@@ -1,0 +1,96 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Purchases</h2>
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="showPurchaseForm = true;
+            editingPurchaseId = null">Add Purchase
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Purchase Id</th>
+                <th>Product Id</th>
+                <th>Quantity</th>
+                <th>Purchase Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let purchase of purchases">
+                <td>{{ purchase.purchaseId }}</td>
+                <td>{{ purchase.productId }}</td>
+                <td>{{ purchase.quantityPurchased }}</td>
+                <td>{{ purchase.purchaseDate }}</td>
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm"
+                        (click)="editPurchase(purchase)">Edit
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm ms-2"
+                        (click)="deletePurchase(purchase.purchaseId!)">delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="purchases.length === 0">
+                <td colspan="5" class="text-center">No purchases found</td>
+            </tr>
+        </tbody>
+    </table>
+     <div *ngIf="showPurchaseForm" class="card mt-4">
+        <div class="card-body">
+            <h4>{{ editingPurchaseId === null ? 'Add Purchase ' : 'Edit Purchase' }}</h4>
+            <form (ngSubmit)="editingPurchaseId === null ? addPurchase() : updatePurchase()">
+                <div class="mb-3">
+                    <label class="form-label">Product</label>
+                    <select
+                        class="form-select"
+                        [(ngModel)]="newPurchase.productId"
+                        name="productId"
+                        required>
+                        <option [ngValue]="0">Select Product</option>
+                        <option 
+                            *ngFor ="let product of products"
+                            [ngValue]="product.productId">{{ product.productName }}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Quantity Purchased</label>
+                    <input 
+                        type="number"
+                        class="form-control"
+                        [(ngModel)]="newPurchase.quantityPurchased"
+                        name="quantityPurchased"
+                        min="1"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Purchase Date</label>
+                    <input 
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="newPurchase.purchaseDate"
+                        name="purchasedate"
+                        required>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary">{{ editingPurchaseId === null ? 'Add Purchase' : 'Update Purchase' }}
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    (click)="cancelEdit()">Cancel
+                </button>
+            </form>
+        </div>
+     </div>
+
+</div>

@@ -1,0 +1,18 @@
+# Angular
+Frontend/node_modules/
+Frontend/.angular/
+Frontend/dist/
+
+# Spring Boot
+Backend/target/
+
+# IDE files
+.vscode/
+.idea/
+
+# Java compiled files
+*.class
+
+# OS files
+.DS_Store
+Thumbs.db
