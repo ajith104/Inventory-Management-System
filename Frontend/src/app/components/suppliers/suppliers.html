@@ -1,0 +1,90 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Suppliers</h2>
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="showSupplierForm = true; editingSupplierId=null">Add Supplier
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Supplier Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let supplier of suppliers">
+            <td>{{ supplier.supplierId }}</td>
+            <td>{{ supplier.supplierName }}</td>
+            <td>{{ supplier.email }}</td>
+            <td>{{ supplier.phone }}</td>
+            <td>
+                <button
+                    type="button"
+                    class="btn btn-warning btn-sm"
+                    (click)="editSupplier(supplier)">Edit
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger btn-sm ms-2"
+                    (click)="deleteSupplier(supplier.supplierId!)">Delete
+                </button>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="showSupplierForm" class="card mt-4">
+        <div class="cadr-body">
+            <h4>{{ editingSupplierId === null ? 'Add Supplier' : 'Edit Supplier' }}</h4>
+
+            <form (ngSubmit)="editingSupplierId === null ? addSupplier() : updateSupplier()">
+                <div class="mb-3">
+                    <label class="form-label">Supplier Name</label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [(ngModel)]="newSupplier.supplierName" 
+                        name="supplierName"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email"
+                        class="form-control"
+                        [(ngModel)]="newSupplier.email"
+                        name="email"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="tel"
+                        class="form-control"
+                        [(ngModel)]="newSupplier.phone"
+                        name="phone"
+                        required>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">{{ editingSupplierId===null ? 'Add Supplier' : 'Update Supplier' }}
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    (click)="cancelEdit()">Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

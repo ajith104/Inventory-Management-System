@@ -1,0 +1,146 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Products</h2>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="showProductForm = true; editingProductId=null">Add product
+        </button>
+    </div>
+    
+    <div class="input-group mb-3">
+        <input
+            type="text"
+            class="form-contorl"
+            placeholder="Search product by name"
+            [(ngModel)]="searchName"
+            (keyup.enter)="searchProducts()">
+
+        <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="searchProducts()">Search
+        </button>
+
+        <button
+            *ngIf="isSearching"
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="clearSearch()">Clear
+        </button>
+
+        <button
+            type="button"
+            class="btn btn-warning ms-2"
+            (click)="loadLowStockProducts()">Low stock
+        </button>
+
+        <button
+            *ngIf="showLowStock"
+            type="button"
+            class="btn btn-success ms-2"
+            (click)="showAllProducts()">Show all</button>
+    </div>
+
+    <div class="alert alert-info d-flex justify-content-between align-items-center">
+        <strong>Total Inventory Value:</strong>
+    </div>
+    <span class="fs-5">{{ inventoryValue | currency }}</span>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.productId }}</td>
+                <td>{{ product.productName }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price | currency }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm"
+                        (click)="editProduct(product)">Edit
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm ms-2"
+                        (click)="deleteProduct(product.productId!)">Delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="products.length === 0">
+                <td colspan="6">No products found
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="showProductForm" class="card mt-4">
+        <div class="card-body">
+            <h4>{{ editingProductId===null ? 'Add Product' : 'Edit Product' }}</h4>
+            <form (ngSubmit)="editingProductId===null ? addProduct() : updateProduct() ">
+                <div class="mb-3">
+                    <label class="form-label">Product Name</label>
+                    <input 
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="newProduct.productName"
+                        name="productName"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <input type="text"
+                        class="form-control"
+                        [(ngModel)]="newProduct.category"
+                        name="category"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number"
+                        class="form-control" 
+                        [(ngModel)]="newProduct.price"
+                        name="price"
+                        min="1"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Quantity</label>
+                    <input type="number"
+                    class="form-control"
+                    [(ngModel)]="newProduct.quantity"
+                    name="quantity"
+                    min="0"
+                    required>
+                </div>
+
+                <button 
+                    type="submit"
+                    class="btn btn-primary">{{ editingProductId===null ? 'Add Product' : 'Update Product' }}
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    (click)="cancelEdit()">Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
