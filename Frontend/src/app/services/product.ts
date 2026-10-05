@@ -11,43 +11,35 @@ export class ProductService {
 
   constructor(private http:HttpClient){}
 
-  getAllProducts():
-  Observable<Product[]>{
+  getAllProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(this.baseUrl)
   }
 
-  getProductById(id: number):
-  Observable<Product>{
+  getProductById(id: number): Observable<Product>{
     return  this.http.get<Product>(`${this.baseUrl}/${id}`)
   }
 
-  addProduct(product: Product):
-  Observable<Product>{
+  addProduct(product: Product): Observable<Product>{
     return this.http.post<Product>(`${this.baseUrl}/add`,product)
   }
 
-  updateProduct(id: number,product: Product):
-  Observable<Product>{
+  updateProduct(id: number,product: Product): Observable<Product>{
     return this.http.put<Product>(`${this.baseUrl}/${id}`,product)
   }
 
-  deleteProduct(id: number):
-  Observable<void>{
+  deleteProduct(id: number): Observable<void>{
     return this.http.delete<void>(`${this.baseUrl}/${id}`)
   }
 
-  getLowStockProducts():
-  Observable<Product[]>{
+  getLowStockProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.baseUrl}/low-stock`)
   }
 
-  searchProducts(name: string):
-  Observable<Product[]>{
+  searchProducts(name: string): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.baseUrl}/search/${name}`)
   }
 
-  getInventoryValue():
-  Observable<number> {
+  getInventoryValue(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/inventory-value`)
   }
 }

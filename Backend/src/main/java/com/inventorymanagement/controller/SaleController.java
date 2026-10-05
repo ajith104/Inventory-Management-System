@@ -47,4 +47,10 @@ public class SaleController {
 	public void deleteSale(@PathVariable Long id) {
 		saleService.deleteSale(id);
 	}
+	
+	@GetMapping("/recent")
+	public List<Sale> getRecentSales(){
+		return
+				saleService.getRecentSales();
+	}
 }

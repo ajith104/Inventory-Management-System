@@ -66,5 +66,14 @@ public class PurchaseService {
 		}
 		purchaseRepository.deleteById(id);
 	}
+	
+	public List<Purchase> getRecentPurchases(){
+		return
+			purchaseRepository.findTop5ByOrderByPurchaseDateDesc();
+	}
+	
+	public long getTotalItemsPurchased() {
+		return purchaseRepository.getTotalItemsPurchased();
+	}
 
 }

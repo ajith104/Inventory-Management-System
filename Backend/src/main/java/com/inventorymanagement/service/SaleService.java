@@ -13,16 +13,16 @@ import com.inventorymanagement.repository.SaleRepository;
 @Service
 public class SaleService {
 
-    private final PredictionService predictionService;
+    //private final PredictionService predictionService;
 	@Autowired
 	private SaleRepository saleRepository;
 	
 	@Autowired
 	private ProductRepository productRepository;
 
-    SaleService(PredictionService predictionService) {
-        this.predictionService = predictionService;
-    }
+    //SaleService(PredictionService predictionService) {
+    //    this.predictionService = predictionService;
+    //}
 		
 	public Sale saveSale(Sale sale) {
 		Product product = productRepository.findById(sale.getProductId()).orElse(null);
@@ -79,6 +79,15 @@ public class SaleService {
 			 productRepository.save(product);
 		 }
 		 saleRepository.deleteById(id);
+	}
+	
+	public List<Sale> getRecentSales(){
+		return
+			saleRepository.findTop5ByOrderBySaleDateDesc();
+	}
+	
+	public long getTotalItemsSold() {
+		return saleRepository.getTotalItemsSold();
 	}
 
 }

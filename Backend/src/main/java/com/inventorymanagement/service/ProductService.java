@@ -47,6 +47,8 @@ public class ProductService {
 			totalValue += product.getPrice() * product.getQuantity();
 		}
 		return totalValue;
-	} 
+	}
+	
+	
 
 }

@@ -47,5 +47,11 @@ public class PurchaseController {
 	public void deletePurchase(@PathVariable Long id) {
 		purchaseService.deletePurchase(id);
 	}
+	
+	@GetMapping("/recent")
+	public List<Purchase> getRecentPurchases() {
+		return
+				purchaseService.getRecentPurchases();
+	}
 
 }
