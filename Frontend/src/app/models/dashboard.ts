@@ -1,6 +1,6 @@
 export interface Dashboard {
     totalProducts: number;
     totalSuppliers: number;
-    totalpurcahses: number;
+    totalPurchases: number;
     totalSales: number;
 }

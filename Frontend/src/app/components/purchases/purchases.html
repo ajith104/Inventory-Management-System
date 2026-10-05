@@ -14,6 +14,7 @@
             <tr>
                 <th>Purchase Id</th>
                 <th>Product Id</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Purchase Date</th>
                 <th>Actions</th>
@@ -23,6 +24,13 @@
             <tr *ngFor="let purchase of purchases">
                 <td>{{ purchase.purchaseId }}</td>
                 <td>{{ purchase.productId }}</td>
+                <td>
+                    <ng-container *ngFor="let product of products">
+                        <span 
+                            *ngIf="product.productId === purchase.productId">{{ product.productName }}
+                        </span>
+                    </ng-container>
+                </td>
                 <td>{{ purchase.quantityPurchased }}</td>
                 <td>{{ purchase.purchaseDate }}</td>
                 <td>
@@ -39,7 +47,7 @@
                 </td>
             </tr>
             <tr *ngIf="purchases.length === 0">
-                <td colspan="5" class="text-center">No purchases found</td>
+                <td colspan="6" class="text-center">No purchases found</td>
             </tr>
         </tbody>
     </table>

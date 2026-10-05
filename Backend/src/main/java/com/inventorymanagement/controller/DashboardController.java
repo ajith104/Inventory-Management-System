@@ -16,9 +16,31 @@ public class DashboardController {
 	@Autowired
 	private DashboardService dashboardService;
 	
+	
+	
 	@GetMapping("/stats")
 	public DashboardStats getStats() {
 		return dashboardService.getDashboardStats();
+	}
+	
+	@GetMapping("/total-stock")
+	public long getTotalStockQuantity() {
+	    return dashboardService.getTotalStockQuantity();
+	}
+	
+	@GetMapping("/out-of-stock")
+	public long getOutOfStock() {
+	    return dashboardService.getOutOfStockCount();
+	}
+	
+	@GetMapping("/total-items-sold")
+	public long getTotalItemsSold() {
+		return dashboardService.getTotalItemsSold();
+	}
+	
+	@GetMapping("/total-items-purchased")
+	public long getTotalItemsPurchased() {
+		return dashboardService.getTotalItemsPurchased();
 	}
 
 }

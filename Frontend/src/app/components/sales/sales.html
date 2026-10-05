@@ -13,7 +13,8 @@
         <thead class="table-dark">
             <tr>
                 <th>Sale Id</th>
-                <th>Product</th>
+                <th>Product Id</th>
+                <th>Product name</th>
                 <th>Quantity Sold</th>
                 <th>Sale Date</th>
                 <th>Actions</th>
@@ -23,6 +24,7 @@
         <tbody>
             <tr *ngFor="let sale of sales">
                 <td>{{ sale.saleId }}</td>
+                <td>{{ sale.productId }}</td>
                 <td>
                     <ng-container *ngFor="let product of products">
                         <span 
@@ -48,7 +50,7 @@
 
             <tr *ngIf="sales.length ===0">
                 <td 
-                    colspan="5"
+                    colspan="6"
                     class="text-center">No sales found
                 </td>
             </tr>

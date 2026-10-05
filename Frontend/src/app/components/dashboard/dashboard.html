@@ -1,1 +1,205 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard</h2>
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <h2 class="card-text">{{ dashboardStats.totalProducts }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Suppliers</h5>
+                    <h2 class="card-text">{{ dashboardStats.totalSuppliers }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Purchases</h5>
+                    <h2 class="card-text">{{ dashboardStats.totalPurchases }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Sales</h5>
+                    <h2 class="card-text">{{ dashboardStats.totalSales }}</h2> 
+                </div>
+            </div>
+        </div>
+
+         <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total InventoryValue</h5>
+                    <h2 class="card-text">{{ inventoryValue }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Stock Quantity</h5>
+                    <h2 class="card-text">{{ totalStockQuantity }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Items Purchased</h5>
+                    <h2 class="card-text">{{ totalItemsPurchased }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Items Sold</h5>
+                    <h2 class="card-text">{{ totalItemsSold }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total Transactions</h5>
+                    <h2 class="card-text">{{ totalTransactions }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Highest Stock Product</h5>
+                    <h5 *ngIf="highestStockProduct" class="card-text">{{ highestStockProduct.productName }}</h5>
+                    <h5 *ngIf="highestStockProduct" class="card-text">{{ highestStockProduct.quantity }} units</h5> 
+                    <h5 *ngIf="!highestStockProduct" class="card-text">No Product Available</h5> 
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Out of Stock</h5>
+                    <h2 class="card-text">{{ outOfStockCount }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock Items</h5>
+                    <h2 class="card-text">{{ lowStockProducts.length }}</h2> 
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h5 class="mb-3">Low Stock Products</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                         <thead>
+                            <tr>
+                                <th>Product Id</th>                                  
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let product of lowStockProducts">
+                                <td>{{ product.productId }}</td>
+                                <td>{{ product.productName }}</td>
+                                <td>{{ product.category }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.quantity }}</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+            </div>
+         </div>
+         
+        <div class="mt-5">
+            <h5 class="mb-3">Recent Purchases</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                         <thead>
+                            <tr>
+                                <th>Purchase Id</th>                                  
+                                <th>Product Id</th>
+                                <th>Product Name</th>
+                                <th>Quantity Purchased</th>
+                                <th>Date Of Purchase</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let purchase of recentPurchases">
+                                <td>{{ purchase.purchaseId }}</td>
+                                <td>{{ purchase.productId }}</td>
+                                <td>
+                                    <ng-container *ngFor="let product of products">
+                                        <span *ngIf="product.productId === purchase.productId">{{ product.productName }}</span>
+                                    </ng-container>
+                                </td>
+                                <td>{{ purchase.quantityPurchased }}</td>
+                                <td>{{ purchase.purchaseDate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+            </div>
+         </div>
+
+         <div class="mt-5">
+            <h5 class="mb-3">Recent Sales</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                         <thead>
+                            <tr>
+                                <th>Sale Id</th>                                  
+                                <th>Product Id</th>
+                                <th>Product Name</th>
+                                <th>Quantity Sold</th>
+                                <th>Date Of Sale</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let sale of recentSales">
+                                <td>{{ sale.saleId }}</td>
+                                <td>{{ sale.productId }}</td>
+                               <td>
+                                    <ng-container *ngFor="let product of products">
+                                        <span *ngIf="product.productId === sale.productId">{{ product.productName }}</span>
+                                    </ng-container>
+                                </td>
+                                <td>{{ sale.quantitySold }}</td>
+                                <td>{{ sale.saleDate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+            </div>
+         </div>
+    </div>
+</div>

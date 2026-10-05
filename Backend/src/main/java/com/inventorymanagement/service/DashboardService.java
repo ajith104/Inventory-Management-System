@@ -26,10 +26,26 @@ public class DashboardService {
 	public DashboardStats getDashboardStats() {
 		return new DashboardStats(
 				productRepository.count(),
-				purchaseRepository.count(),
 				saleRepository.count(),
+				purchaseRepository.count(),
 				supplierRepository.count()
 		);
+	}
+	
+	public long getTotalStockQuantity() {
+	    return productRepository.getTotalStockQuantity();
+	}
+	
+	public long getOutOfStockCount() {
+		return productRepository.countByQuantity(0);
+	}
+	
+	public long getTotalItemsSold() {
+		return saleRepository.getTotalItemsSold();
+	}
+	
+	public long getTotalItemsPurchased() {
+		return purchaseRepository.getTotalItemsPurchased();
 	}
 
 }
