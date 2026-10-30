@@ -3,6 +3,7 @@
         <h2>Products</h2>
 
         <button
+            *ngIf="role === 'OWNER' || role=== 'MANAGER'"
             type="button"
             class="btn btn-primary"
             (click)="showProductForm = true; editingProductId=null">Add product
@@ -43,10 +44,10 @@
             (click)="showAllProducts()">Show all</button>
     </div>
 
-    <div class="alert alert-info d-flex justify-content-between align-items-center">
+    <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="alert alert-info d-flex justify-content-between align-items-center">
         <strong>Total Inventory Value:</strong>
-    </div>
-    <span class="fs-5">{{ inventoryValue | currency }}</span>
+    <span class="fs-5 text-start">{{ inventoryValue | currency }}</span>
+     </div>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
@@ -56,7 +57,7 @@
                 <th>Category</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Actions</th>
+                <th *ngIf="role === 'OWNER' || role=== 'MANAGER'">Actions</th>
             </tr>
         </thead>
 
@@ -67,7 +68,7 @@
                 <td>{{ product.category }}</td>
                 <td>{{ product.price | currency }}</td>
                 <td>{{ product.quantity }}</td>
-                <td>
+                <td *ngIf="role === 'OWNER' || role=== 'MANAGER'">
                     <button
                         type="button"
                         class="btn btn-warning btn-sm"

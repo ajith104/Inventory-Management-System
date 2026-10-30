@@ -3,6 +3,8 @@ package com.inventorymanagement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class UserController {
 	}
 	
 	@GetMapping
-	public List<User> getAllSales() {
+	public List<User> getAllUesrs() {
 		return userService.getAllUser();
 	}
 	
@@ -40,14 +42,39 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public User updateUser(@PathVariable Long id, @RequestBody User user) {
-		user.setUserId(id);
-		return userService.saveUser(user);
+	public void updateUserRole(
+	        @PathVariable Long id,
+	        @RequestBody User user,
+	        Authentication authentication) {
+
+	    String username = authentication.getName();
+
+	    String role = authentication.getAuthorities()
+	            .stream()
+	            .map(GrantedAuthority::getAuthority)
+	            .filter(authority -> authority.startsWith("ROLE_"))
+	            .map(authority -> authority.substring(5))
+	            .findFirst()
+	            .orElse("");
+
+	    userService.updateUserRole(
+	            id, user.getRole(), username, role);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteSale(@PathVariable Long id) {
-		userService.deleteUser(id);
+	public void deleteUser(@PathVariable Long id, Authentication authentication) {
+
+	    String username = authentication.getName();
+
+	    String role = authentication.getAuthorities()
+	            .stream()
+	            .map(GrantedAuthority::getAuthority)
+	            .filter(authority -> authority.startsWith("ROLE_"))
+	            .map(authority -> authority.substring(5))
+	            .findFirst()
+	            .orElse("");
+
+	    userService.deleteUser(id, username, role);
 	}
 
 }

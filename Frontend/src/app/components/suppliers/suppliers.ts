@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms'
   styleUrl: './suppliers.css',
 })
 export class Suppliers implements OnInit {
-
+  role = localStorage.getItem('role')
   suppliers: Supplier[]= []
 
   constructor(private supplierService: SupplierService){}

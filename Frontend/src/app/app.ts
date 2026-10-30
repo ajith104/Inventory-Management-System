@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,10 @@ import { Navbar } from './components/navbar/navbar';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('inventory-management-frontend');
+  showNavbar = true
+  constructor(private router: Router) {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.showNavbar = event.urlAfterRedirects !== '/login'
+    })
+  }
 }

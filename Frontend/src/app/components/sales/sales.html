@@ -17,7 +17,7 @@
                 <th>Product name</th>
                 <th>Quantity Sold</th>
                 <th>Sale Date</th>
-                <th>Actions</th>
+                <th *ngIf="role === 'OWNER' || role=== 'MANAGER'">Actions</th>
             </tr>
         </thead>
 
@@ -34,7 +34,7 @@
                 </td>
                 <td>{{ sale.quantitySold }}</td>
                 <td>{{ sale.saleDate }}</td>
-                <td>
+                <td *ngIf="role === 'OWNER' || role=== 'MANAGER'">
                     <button
                         type="button"
                         class="btn btn-warning btn-sm"

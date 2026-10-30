@@ -5,14 +5,18 @@ import { Suppliers } from './components/suppliers/suppliers';
 import { Purchases } from './components/purchases/purchases';
 import { Sales } from './components/sales/sales';
 import { Users } from './components/users/users';
+import { Login } from './components/login/login';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'dashboard',pathMatch:'full'},
-    {path:'dashboard',component:Dashboard},
-    {path:'products',component:Products},
-    {path:'suppliers',component:Suppliers},
-    {path:'purchase',component:Purchases},
-    {path:'sales',component:Sales},
-    {path:'users',component:Users}
+    { path: '',redirectTo: 'login', pathMatch:'full' },
+    { path: 'dashboard', component:Dashboard, canActivate: [authGuard]},
+    { path: 'products', component:Products, canActivate: [authGuard] },
+    { path: 'suppliers', component:Suppliers, canActivate: [authGuard], data: { roles: ['OWNER', 'MANAGER'] } },
+    { path: 'purchase', component:Purchases, canActivate: [authGuard], data: { roles: ['OWNER', 'MANAGER'] } },
+    { path: 'sales', component:Sales, canActivate: [authGuard] },
+    { path: 'users', component:Users, canActivate: [authGuard], data: { roles: ['OWNER', 'MANAGER'] } },
+    { path: 'login', component:Login },
+    { path: '**', redirectTo:'login'}
 
 ];

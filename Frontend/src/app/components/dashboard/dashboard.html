@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
+        <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">Total Suppliers</h5>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
+        <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">Total Purchases</h5>
@@ -37,8 +37,7 @@
                 </div>
             </div>
         </div>
-
-         <div class="col-md-6 col-lg-3">
+         <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">Total InventoryValue</h5>
@@ -56,7 +55,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
+        <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">Total Items Purchased</h5>
@@ -74,7 +73,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
+        <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">Total Transactions</h5>
@@ -140,7 +139,7 @@
             </div>
          </div>
          
-        <div class="mt-5">
+        <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="mt-5" >
             <h5 class="mb-3">Recent Purchases</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">

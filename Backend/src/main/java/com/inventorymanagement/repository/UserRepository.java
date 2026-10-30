@@ -8,5 +8,7 @@ import com.inventorymanagement.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	 User findByUsername(String usename);
+	 
+	 boolean existsByRole(String role);
 
 }

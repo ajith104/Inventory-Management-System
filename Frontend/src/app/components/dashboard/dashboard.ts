@@ -13,6 +13,7 @@ import { Sale } from '../../models/sale'
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
+  role = localStorage.getItem('role')
   totalStockQuantity = 0
   totalTransactions = 0
   highestStockProduct: Product | null = null

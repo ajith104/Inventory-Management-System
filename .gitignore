@@ -15,4 +15,8 @@ Backend/target/
 
 # OS files
 .DS_Store
-Thumbs.db# Inventory Management System
+Thumbs.db
+# Inventory Management System
+
+# Sensitive configurations
+Backend/src/main/resources/application.properties

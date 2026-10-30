@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms'
   styleUrl: './products.css',
 })
 export class Products implements OnInit {
+  role = localStorage.getItem('role')
   products: Product[] = []
   searchName = ''
   isSearching = false

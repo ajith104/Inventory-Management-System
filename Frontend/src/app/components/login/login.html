@@ -1,0 +1,44 @@
+<div class="container mt-5" style="max-width: 420px;">
+    <div class="card shadow">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4">Inventory Management</h2>
+            <h5 class="text-center mb-4">Login</h5>
+
+            <form (ngSubmit)="login()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        [(ngModel)]="username"
+                        placeholder="Enter your username"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        [(ngModel)]="password"
+                        placeholder="Enter your password"
+                        required>
+                </div>
+
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <button 
+                    type="submit"
+                    class="btn btn-primary w-100"
+                    [disabled]="loading">{{ loading ? 'Logging in...' : 'Login'}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

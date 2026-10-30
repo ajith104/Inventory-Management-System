@@ -14,6 +14,8 @@ import { ProductService } from '../../services/product'
   styleUrl: './purchases.css',
 })
 export class Purchases implements OnInit {
+  role = localStorage.getItem('role')
+
   purchases: Purchase[] = []
   products: Product[] = []
 

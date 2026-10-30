@@ -11,7 +11,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	private String username;
-	private String paasword;
+	private String password;
 	private String role;
 	public Long getUserId() {
 		return userId;
@@ -25,11 +25,11 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPaasword() {
-		return paasword;
+	public String getPassword() {
+		return password;
 	}
-	public void setPaasword(String paasword) {
-		this.paasword = paasword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getRole() {
 		return role;
@@ -39,13 +39,13 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", paasword=" + paasword + ", role=" + role + "]";
+		return "User [userId=" + userId + ", username=" + username + ", role=" + role + "]";
 	}
-	public User(Long userId, String username, String paasword, String role) {
+	public User(Long userId, String username, String paasword, String role, String password) {
 		super();
 		this.userId = userId;
 		this.username = username;
-		this.paasword = paasword;
+		this.password = password;
 		this.role = role;
 	}
 	public User() {
