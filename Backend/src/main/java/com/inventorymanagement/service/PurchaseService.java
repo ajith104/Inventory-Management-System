@@ -75,5 +75,4 @@ public class PurchaseService {
 	public long getTotalItemsPurchased() {
 		return purchaseRepository.getTotalItemsPurchased();
 	}
-
 }

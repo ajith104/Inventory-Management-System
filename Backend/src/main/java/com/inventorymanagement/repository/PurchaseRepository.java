@@ -15,5 +15,4 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	
 	@Query("SELECT COALESCE(SUM(pr.quantityPurchased),0)From Purchase pr")
 	long getTotalItemsPurchased();
-
 }

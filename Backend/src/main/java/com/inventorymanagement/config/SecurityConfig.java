@@ -92,10 +92,15 @@ public class SecurityConfig {
     	    	.requestMatchers("/suppliers","/suppliers/**")
     	    		.hasAnyRole("OWNER","MANAGER")
     	    		
-    	    		.requestMatchers(
-                	        org.springframework.http.HttpMethod.GET,
-                	        "/dashboard/total-items-purchased").hasAnyRole("OWNER","MANAGER")
-    	    	
+                 .requestMatchers(
+                        "/predictions",
+                        "/predictions/**"
+                ).hasAnyRole("OWNER", "MANAGER")
+
+                .requestMatchers(
+                        "/reorder",
+                        "/reorder/**"
+                ).hasAnyRole("OWNER", "MANAGER")
         	    .anyRequest().authenticated()
         	)
         .addFilterBefore(

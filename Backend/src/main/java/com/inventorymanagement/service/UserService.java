@@ -99,5 +99,4 @@ public class UserService {
 	    targetUser.setRole(newRole);
 	    userRepository.save(targetUser);
 	}
-
 }

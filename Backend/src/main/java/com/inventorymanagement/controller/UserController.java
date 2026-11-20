@@ -76,5 +76,4 @@ public class UserController {
 
 	    userService.deleteUser(id, username, role);
 	}
-
 }

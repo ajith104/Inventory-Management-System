@@ -138,6 +138,66 @@
                     </table>    
             </div>
          </div>
+
+
+        <div *ngIf="role === 'OWNER' || role === 'MANAGER'">
+                <h5 class="mb-3">Stock Predictions</h5>
+            <div class="card-body">
+                <p *ngIf="stockPredictions.length === 0" class="text-muted">No stock predictions available</p>
+                <div class="table-responsive" *ngIf="stockPredictions.length > 0">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Current Stock</th>
+                                <th>Average Daily Sales</th>
+                                <th>Predicted Remaining Days</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let prediction of stockPredictions">
+                                <td>{{ prediction.productName }}</td>
+                                <td>{{ prediction.currentStock }}</td>
+                                <td>{{ prediction.averageDailySales | number:'1.1-2' }}</td>
+                                <td>{{ prediction.predictedDaysRemaining >= 0 ? prediction.predictedDaysRemaining + ' days': 'Insufficient sales data' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div *ngIf="role === 'OWNER' || role === 'MANAGER'">
+            <h5 class="mb-3">Smart Reorder Suggestions</h5>
+            <div class="card-body">
+                <p *ngIf="reorderSuggestions.length === 0" class="text-muted">No reorder suggestions at present.</p>
+                <div class="table-responsive" *ngIf="reorderSuggestions.length > 0">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Current Stock</th>
+                                <th>Average Daily Sales</th>
+                                <th>Suggested Purchase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let suggestion of reorderSuggestions">
+                                <td>{{ suggestion.productName }}</td>
+                                <td>{{ suggestion.currentStock }}</td>
+                                <td>{{ suggestion.averageDailySales | number:'1.1-2' }}</td>
+                                <td><strong class="text-danger">{{ suggestion.suggestedQuantity }} units</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
          
         <div *ngIf="role === 'OWNER' || role=== 'MANAGER'" class="mt-5" >
             <h5 class="mb-3">Recent Purchases</h5>
@@ -168,9 +228,9 @@
                         </tbody>
                     </table>    
             </div>
-         </div>
+        </div>
 
-         <div class="mt-5">
+        <div class="mt-5">
             <h5 class="mb-3">Recent Sales</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">

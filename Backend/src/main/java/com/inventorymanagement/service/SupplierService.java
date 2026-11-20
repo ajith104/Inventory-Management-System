@@ -28,5 +28,4 @@ public class SupplierService {
 	public void deleteSupplier(Long id) {
 		 supplierRepository.deleteById(id);
 	}
-
 }

@@ -53,5 +53,4 @@ public class PurchaseController {
 		return
 				purchaseService.getRecentPurchases();
 	}
-
 }

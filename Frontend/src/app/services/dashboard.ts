@@ -5,6 +5,8 @@ import { Dashboard } from '../models/dashboard'
 import { Product } from '../models/product'
 import { Purchase } from '../models/purchase'
 import { Sale } from '../models/sale'
+import { StockPrediction } from '../models/stock-prediction'
+import { ReorderSuggestion } from '../models/reorder-suggestion'
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +14,8 @@ import { Sale } from '../models/sale'
 export class DashboardService {
   private baseUrl='http://localhost:8080/dashboard'
   private productsUrl='http://localhost:8080/products'
+  private predictionsUrl = 'http://localhost:8080/predictions';
+  private reorderUrl = 'http://localhost:8080/reorder';
 
 
   constructor(private http:HttpClient) {}
@@ -54,5 +58,13 @@ export class DashboardService {
 
   getTotalItemsPurchased(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/total-items-purchased`)
+  }
+
+  getStockPredictions(): Observable<StockPrediction[]> {
+    return this.http.get<StockPrediction[]>(this.predictionsUrl);
+  }
+
+  getReorderSuggestions(): Observable<ReorderSuggestion[]> {
+    return this.http.get<ReorderSuggestion[]>(this.reorderUrl);
   }
 }

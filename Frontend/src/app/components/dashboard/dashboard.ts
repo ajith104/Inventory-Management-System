@@ -5,6 +5,8 @@ import { Dashboard as DashboardModel } from '../../models/dashboard'
 import { Product } from '../../models/product'
 import { Purchase } from '../../models/purchase'
 import { Sale } from '../../models/sale'
+import { StockPrediction } from '../../models/stock-prediction'
+import { ReorderSuggestion } from '../../models/reorder-suggestion'
 
 @Component({
   selector: 'app-dashboard',
@@ -31,20 +33,28 @@ export class Dashboard implements OnInit {
     totalPurchases: 0,
     totalSales: 0
   }
+  stockPredictions: StockPrediction[] = []
+  reorderSuggestions: ReorderSuggestion[] = [];
+
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.loadDashboardStats()
     this.loadLowStockProducts()
-    this.loadInventoryValue()
-    this.loadRecentPurchases()
     this.loadRecentSales()
     this.loadProducts()
     this.loadTotalStockQuantity()
     this.loadOutOfStockCount()
     this.loadTotalItemsSold()
-    this.loadTotalItemsPurchased()
+
+    if(this.role === 'OWNER' || this.role === 'MANAGER'){
+      this.loadInventoryValue()
+      this.loadRecentPurchases()
+      this.loadTotalItemsPurchased()
+      this.loadStockPredictions()
+      this.loadReorderSuggestions()
+    }
   }
 
   loadDashboardStats(): void {
@@ -164,4 +174,26 @@ export class Dashboard implements OnInit {
         }
       })
     }
+
+    loadStockPredictions(): void {
+    this.dashboardService.getStockPredictions().subscribe({
+        next: (data) => {
+            this.stockPredictions = data;
+        },
+        error: (error) => {
+            console.error('Error loading stock predictions:', error)
+        }
+    });
+  }
+
+  loadReorderSuggestions(): void {
+    this.dashboardService.getReorderSuggestions().subscribe({
+        next: (data) => {
+            this.reorderSuggestions = data;
+        },
+        error: (error) => {
+            console.error('Error loading reorder suggestions:', error)
+        }
+    });
+  }
 }

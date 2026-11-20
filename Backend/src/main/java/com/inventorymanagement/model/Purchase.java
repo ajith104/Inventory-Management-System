@@ -55,6 +55,4 @@ public class Purchase {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }

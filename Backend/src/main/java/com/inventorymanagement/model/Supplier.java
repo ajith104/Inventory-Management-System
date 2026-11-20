@@ -53,6 +53,4 @@ public class Supplier {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }

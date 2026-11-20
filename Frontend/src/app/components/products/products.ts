@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms'
 export class Products implements OnInit {
   role = localStorage.getItem('role')
   products: Product[] = []
+  allProducts: Product[] = []
   searchName = ''
   isSearching = false
   showProductForm = false
@@ -26,15 +27,24 @@ export class Products implements OnInit {
     price: 0,
     quantity: 0
   }
+  selectedCategory: string = ''
+  appliedCategory: string = ''
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.loadProducts()
-    this.loadInventoryValue()
+    if(this.role === ' OWNER' || this.role === 'MANAGER'){
+      this.loadInventoryValue()
+    }
   }
 
   loadProducts(): void {
-    this.productService.getAllProducts().subscribe(data => {this.products=data;})
+    this.productService.getAllProducts().subscribe(
+      data => {
+        this.products= data
+        this.allProducts = data}
+    )
   }
 
   addProduct(): void {
@@ -138,9 +148,19 @@ export class Products implements OnInit {
     searchProducts(): void{
       const name=this.searchName.trim()
 
-      if(name=== ''){
-        this.loadProducts;
-        this.isSearching = true
+      this.appliedCategory = this.selectedCategory
+
+      if(name === ''){
+        this.productService.getAllProducts().subscribe({
+          next: (data) => {
+            this.products = data
+            this.isSearching = true
+          },
+          error: (error) => {
+          console.error("Error while loading products:",error)
+        }
+        })
+        return
       }
 
       this.productService.searchProducts(name).subscribe({
@@ -156,8 +176,10 @@ export class Products implements OnInit {
 
     clearSearch(): void{
       this.searchName = '',
+      this.selectedCategory = '',
+      this.appliedCategory = '',
       this.isSearching = false,
-      this.loadProducts()
+      this.showAllProducts()
     }
 
     loadLowStockProducts(): void {
@@ -190,5 +212,22 @@ export class Products implements OnInit {
           console.error('Error while loading iventory value:',error)
         }
       })
+    }
+
+    get category(): string[] {
+      return [ ...new Set(
+        this.allProducts
+            .map(products => products.category)
+            .filter(category => category && category.trim() !== '')
+      )].sort()
+    }
+
+    get filteredProducts(): Product[] {
+      if(!this.appliedCategory) {
+          return this.products
+        }
+            return this.products.filter(
+              product => product.category === this.appliedCategory
+            )
     }
 }

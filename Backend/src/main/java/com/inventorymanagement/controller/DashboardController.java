@@ -42,5 +42,4 @@ public class DashboardController {
 	public long getTotalItemsPurchased() {
 		return dashboardService.getTotalItemsPurchased();
 	}
-
 }

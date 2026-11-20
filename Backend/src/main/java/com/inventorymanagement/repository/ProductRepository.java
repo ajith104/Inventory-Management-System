@@ -18,5 +18,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	long getTotalStockQuantity();
 	
 	long countByQuantity(int quantity);
-
 }

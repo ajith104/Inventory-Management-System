@@ -63,5 +63,4 @@ public class ProductController {
 	public double getInventoryValue() {
 		return productService.getInventoryValue();
 	}
-
 }

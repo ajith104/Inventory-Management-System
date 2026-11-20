@@ -89,5 +89,4 @@ public class SaleService {
 	public long getTotalItemsSold() {
 		return saleRepository.getTotalItemsSold();
 	}
-
 }

@@ -38,9 +38,4 @@ public class DashboardStats {
 	public void setTotalSuppliers(long totalSuppliers) {
 		this.totalSuppliers = totalSuppliers;
 	}
-	
-	
-	
-	
-
 }

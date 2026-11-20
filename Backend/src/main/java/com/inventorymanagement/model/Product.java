@@ -61,6 +61,4 @@ public class Product {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }

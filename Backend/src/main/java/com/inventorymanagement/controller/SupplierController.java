@@ -49,5 +49,4 @@ public class SupplierController {
 	public void deleteSupplier(@PathVariable Long id) {
 		supplierService.deleteSupplier(id);
 	}
-
 }

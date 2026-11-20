@@ -1,5 +1,6 @@
 package com.inventorymanagement.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,8 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	
 	@Query("SELECT COALESCE(SUM(s.quantitySold),0)From Sale s")
 	long getTotalItemsSold();
+
+	List<Sale> findBySaleDateGreaterThanEqual(LocalDate startDate);
+
 
 }

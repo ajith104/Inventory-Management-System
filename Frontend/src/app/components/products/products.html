@@ -18,12 +18,15 @@
             [(ngModel)]="searchName"
             (keyup.enter)="searchProducts()">
 
+        <select class="form-select" [(ngModel)]="selectedCategory">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of category" [value]="category">{{ category }}</option>
+        </select>
         <button
             type="button"
             class="btn btn-secondary"
             (click)="searchProducts()">Search
         </button>
-
         <button
             *ngIf="isSearching"
             type="button"
@@ -62,7 +65,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let product of products">
+            <tr *ngFor="let product of filteredProducts">
                 <td>{{ product.productId }}</td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.category }}</td>

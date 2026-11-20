@@ -55,6 +55,4 @@ public class Sale {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }

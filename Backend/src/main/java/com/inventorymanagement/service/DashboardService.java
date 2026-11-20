@@ -47,5 +47,4 @@ public class DashboardService {
 	public long getTotalItemsPurchased() {
 		return purchaseRepository.getTotalItemsPurchased();
 	}
-
 }
